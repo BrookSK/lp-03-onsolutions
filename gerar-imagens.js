@@ -66,8 +66,9 @@ const names = [
 ];
 
 function isValidPng(buf) {
+  // Assinatura PNG: 8 bytes. Encerramento IEND: 12 bytes (len+tipo+CRC).
   const sigOk = buf.slice(0, 8).toString("hex") === "89504e470d0a1a0a";
-  const endOk = buf.slice(-8).toString("hex") === "0000000049454e44ae426082";
+  const endOk = buf.slice(-12).toString("hex") === "0000000049454e44ae426082";
   return sigOk && endOk;
 }
 
